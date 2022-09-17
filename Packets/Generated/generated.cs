@@ -11,6 +11,8 @@
 #pragma warning disable SA1312 // Variable names should begin with lower-case letter
 #pragma warning disable SA1649 // File name should match first type name
 
+using ServerPrototype.Shared;
+
 namespace MessagePack.Resolvers
 {
     public class GeneratedResolver : global::MessagePack.IFormatterResolver
