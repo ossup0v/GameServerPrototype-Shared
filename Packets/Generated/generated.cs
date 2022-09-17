@@ -47,13 +47,14 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(5)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(6)
             {
                 { typeof(global::ServerPrototype.Shared.Packets.ClientToServer.IClientToServerPacket), 0 },
-                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.PlayerProfileInfo), 1 },
-                { typeof(global::ServerPrototype.Shared.Packets.ClientToServer.LoginPacket), 2 },
-                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.LoginConfirmPacket), 3 },
-                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.LoginDenyPacket), 4 },
+                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacket), 1 },
+                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.PlayerProfileInfo), 2 },
+                { typeof(global::ServerPrototype.Shared.Packets.ClientToServer.LoginPacket), 3 },
+                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.LoginConfirmPacket), 4 },
+                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.LoginDenyPacket), 5 },
             };
         }
 
@@ -68,10 +69,11 @@ namespace MessagePack.Resolvers
             switch (key)
             {
                 case 0: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ClientToServer.IClientToServerPacketFormatter();
-                case 1: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ServerToClient.PlayerProfileInfoFormatter();
-                case 2: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ClientToServer.LoginPacketFormatter();
-                case 3: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ServerToClient.LoginConfirmPacketFormatter();
-                case 4: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ServerToClient.LoginDenyPacketFormatter();
+                case 1: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacketFormatter();
+                case 2: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ServerToClient.PlayerProfileInfoFormatter();
+                case 3: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ClientToServer.LoginPacketFormatter();
+                case 4: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ServerToClient.LoginConfirmPacketFormatter();
+                case 5: return new MessagePack.Formatters.ServerPrototype.Shared.Packets.ServerToClient.LoginDenyPacketFormatter();
                 default: return null;
             }
         }
@@ -110,13 +112,15 @@ namespace MessagePack.Formatters.ServerPrototype.Shared.Packets.ClientToServer
 
         public IClientToServerPacketFormatter()
         {
-            this.typeToKeyAndJumpMap = new global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>>(1, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
+            this.typeToKeyAndJumpMap = new global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>>(2, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
             {
                 { typeof(global::ServerPrototype.Shared.Packets.ClientToServer.LoginPacket).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(0, 0) },
+                { typeof(global::ServerPrototype.Shared.StartBuildFarmConstructionPacket).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(1, 1) },
             };
-            this.keyToJumpMap = new global::System.Collections.Generic.Dictionary<int, int>(1)
+            this.keyToJumpMap = new global::System.Collections.Generic.Dictionary<int, int>(2)
             {
                 { 0, 0 },
+                { 1, 1 },
             };
         }
 
@@ -131,6 +135,9 @@ namespace MessagePack.Formatters.ServerPrototype.Shared.Packets.ClientToServer
                 {
                     case 0:
                         options.Resolver.GetFormatterWithVerify<global::ServerPrototype.Shared.Packets.ClientToServer.LoginPacket>().Serialize(ref writer, (global::ServerPrototype.Shared.Packets.ClientToServer.LoginPacket)value, options);
+                        break;
+                    case 1:
+                        options.Resolver.GetFormatterWithVerify<global::ServerPrototype.Shared.StartBuildFarmConstructionPacket>().Serialize(ref writer, (global::ServerPrototype.Shared.StartBuildFarmConstructionPacket)value, options);
                         break;
                     default:
                         break;
@@ -168,6 +175,9 @@ namespace MessagePack.Formatters.ServerPrototype.Shared.Packets.ClientToServer
                 case 0:
                     result = (global::ServerPrototype.Shared.Packets.ClientToServer.IClientToServerPacket)options.Resolver.GetFormatterWithVerify<global::ServerPrototype.Shared.Packets.ClientToServer.LoginPacket>().Deserialize(ref reader, options);
                     break;
+                case 1:
+                    result = (global::ServerPrototype.Shared.Packets.ClientToServer.IClientToServerPacket)options.Resolver.GetFormatterWithVerify<global::ServerPrototype.Shared.StartBuildFarmConstructionPacket>().Deserialize(ref reader, options);
+                    break;
                 default:
                     reader.Skip();
                     break;
@@ -204,6 +214,89 @@ namespace MessagePack.Formatters.ServerPrototype.Shared.Packets.ClientToServer
 
 namespace MessagePack.Formatters.ServerPrototype.Shared.Packets.ServerToClient
 {
+    public sealed class IServerToClientPacketFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacket>
+    {
+        private readonly global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>> typeToKeyAndJumpMap;
+        private readonly global::System.Collections.Generic.Dictionary<int, int> keyToJumpMap;
+
+        public IServerToClientPacketFormatter()
+        {
+            this.typeToKeyAndJumpMap = new global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>>(2, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
+            {
+                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.LoginConfirmPacket).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(0, 0) },
+                { typeof(global::ServerPrototype.Shared.Packets.ServerToClient.LoginDenyPacket).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(1, 1) },
+            };
+            this.keyToJumpMap = new global::System.Collections.Generic.Dictionary<int, int>(2)
+            {
+                { 0, 0 },
+                { 1, 1 },
+            };
+        }
+
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacket value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            global::System.Collections.Generic.KeyValuePair<int, int> keyValuePair;
+            if (value != null && this.typeToKeyAndJumpMap.TryGetValue(value.GetType().TypeHandle, out keyValuePair))
+            {
+                writer.WriteArrayHeader(2);
+                writer.WriteInt32(keyValuePair.Key);
+                switch (keyValuePair.Value)
+                {
+                    case 0:
+                        options.Resolver.GetFormatterWithVerify<global::ServerPrototype.Shared.Packets.ServerToClient.LoginConfirmPacket>().Serialize(ref writer, (global::ServerPrototype.Shared.Packets.ServerToClient.LoginConfirmPacket)value, options);
+                        break;
+                    case 1:
+                        options.Resolver.GetFormatterWithVerify<global::ServerPrototype.Shared.Packets.ServerToClient.LoginDenyPacket>().Serialize(ref writer, (global::ServerPrototype.Shared.Packets.ServerToClient.LoginDenyPacket)value, options);
+                        break;
+                    default:
+                        break;
+                }
+
+                return;
+            }
+
+            writer.WriteNil();
+        }
+
+        public global::ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacket Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (reader.TryReadNil())
+            {
+                return null;
+            }
+
+            if (reader.ReadArrayHeader() != 2)
+            {
+                throw new global::System.InvalidOperationException("Invalid Union data was detected. Type:global::ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacket");
+            }
+
+            options.Security.DepthStep(ref reader);
+            var key = reader.ReadInt32();
+
+            if (!this.keyToJumpMap.TryGetValue(key, out key))
+            {
+                key = -1;
+            }
+
+            global::ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacket result = null;
+            switch (key)
+            {
+                case 0:
+                    result = (global::ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacket)options.Resolver.GetFormatterWithVerify<global::ServerPrototype.Shared.Packets.ServerToClient.LoginConfirmPacket>().Deserialize(ref reader, options);
+                    break;
+                case 1:
+                    result = (global::ServerPrototype.Shared.Packets.ServerToClient.IServerToClientPacket)options.Resolver.GetFormatterWithVerify<global::ServerPrototype.Shared.Packets.ServerToClient.LoginDenyPacket>().Deserialize(ref reader, options);
+                    break;
+                default:
+                    reader.Skip();
+                    break;
+            }
+
+            reader.Depth--;
+            return result;
+        }
+    }
+
     public sealed class PlayerProfileInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::ServerPrototype.Shared.Packets.ServerToClient.PlayerProfileInfo>
     {
         private readonly global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>> typeToKeyAndJumpMap;
