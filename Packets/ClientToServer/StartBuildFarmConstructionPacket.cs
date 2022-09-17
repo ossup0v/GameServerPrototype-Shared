@@ -3,6 +3,7 @@ using ServerPrototype.Shared.Packets.ClientToServer;
 
 namespace ServerPrototype.Shared
 {
+    [MessagePackObject]
     public class StartBuildFarmConstructionPacket : IClientToServerPacket
     {
         public StartBuildFarmConstructionPacket() { }
