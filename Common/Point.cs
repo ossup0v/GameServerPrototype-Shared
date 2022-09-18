@@ -3,6 +3,7 @@
 namespace ServerPrototype.Shared
 {
     [MessagePackObject]
+    [Serializable]
     public struct Point
     {
         [Key(0)]
