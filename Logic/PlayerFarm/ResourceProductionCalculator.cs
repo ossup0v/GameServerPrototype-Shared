@@ -2,25 +2,25 @@
 
 namespace ServerPrototype.Shared
 {
-   public class ResourceProfitCalculator
+   public class ResourceProductionCalculator
    {
-       public static Dictionary<int, ulong> GetResourceAmountToReceive(
+       public static Dictionary<ResourceType, ulong> GetResourceAmountToReceive(
            DateTime lastUpdateUtc,
-           Dictionary<int, ulong> resourcePerNTimeBase,
-           Dictionary<int, decimal> boostResourcePerResource,
+           Dictionary<ResourceType, ulong> resourcePerNTimeBase,
+           Dictionary<ResourceType, double> boostResourcePerResource,
            ILogger logger,
-           decimal timeMultiplayer = 1)
+           double timeMultiplayer = 1)
        {
-           Dictionary<int, ulong> result = new Dictionary<int, ulong>(resourcePerNTimeBase.Count);
+           Dictionary<ResourceType, ulong> result = new Dictionary<ResourceType, ulong>(resourcePerNTimeBase.Count);
    
            var amountOfSecFromLastUpdate = (long)(DateTime.UtcNow - lastUpdateUtc).TotalSeconds * timeMultiplayer;
    
            if (amountOfSecFromLastUpdate < 0)
-               logger.LogError($"ResourceProfitCalculator.GetResourceAmountToReceive amountOfSecFromLastUpdate < 0, {amountOfSecFromLastUpdate}");
+               logger.LogError($"ResourceProductionCalculator.GetResourceAmountToReceive amountOfSecFromLastUpdate < 0, {amountOfSecFromLastUpdate}");
    
            foreach (var resource in resourcePerNTimeBase)
            {
-               decimal resourceBonusMultiplayer = 0.0M;
+               double resourceBonusMultiplayer = 0.0D;
                boostResourcePerResource.TryGetValue(resource.Key, out resourceBonusMultiplayer);
                var finalBonusMultiplayer = 1 + resourceBonusMultiplayer;
    
