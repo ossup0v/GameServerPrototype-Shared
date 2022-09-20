@@ -6,6 +6,12 @@ namespace ServerPrototype.Shared.Packets.ServerToClient
     [MessagePackObject]
     public class LoginConfirmPacket : PlayerProfileInfo, IServerToClientPacket
     {
+        [Key(9)] 
+        public ConstructionInfo[] Constructions { get; set; }
+        [Key(10)]
+        public IReadOnlyDictionary<ResourceType, ulong> Resources { get; set; }
+
+
         protected bool Equals(LoginConfirmPacket other)
         {
             return base.Equals(other);
@@ -43,6 +49,6 @@ namespace ServerPrototype.Shared.Packets.ServerToClient
     public interface INetworkPlayer
     {
         string UserId { get; }
-        string NickName { get; set; }
+        string Nickname { get; set; }
     }
 }

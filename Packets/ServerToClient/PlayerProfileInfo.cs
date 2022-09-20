@@ -16,7 +16,11 @@ namespace ServerPrototype.Shared.Packets.ServerToClient
         [Key(5)]
         public int[] Heroes { get; set; }
         [Key(6)]
-        public string NickName { get; set; }
+        public string Nickname { get; set; }
+        [Key(7)]
+        public DateTime LastLogin { get; set; }
+        [Key(8)]
+        public DateTime CreatedAt { get; set; }
 
         public override bool Equals(object other)
         {
